@@ -297,6 +297,24 @@ RCT_EXPORT_METHOD(getPlayerImage:(RCTPromiseResolveBlock)resolve
  Leaderboard
   -----------------------------------------------------------------------------------------------------------------------------------------*/
 
+/* --------------openLeaderboards--------------*/
+RCT_EXPORT_METHOD(openLeaderboards:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject){
+
+  if(_isGameCenterAvailable==NO){
+    reject(@"Error",@"Game Center is Unavailable", nil);
+    return;
+  }
+
+  UIViewController *rnView = [UIApplication sharedApplication].keyWindow.rootViewController;
+  GKGameCenterViewController *leaderboardController = [[GKGameCenterViewController alloc] init];
+
+  leaderboardController.viewState = GKGameCenterViewControllerStateLeaderboards;
+  leaderboardController.gameCenterDelegate = self;
+  [rnView presentViewController: leaderboardController animated: YES completion:nil];
+  resolve(@"opened Leaderboard");
+}
+
 /* --------------openLeaderboardModal--------------*/
 //RCT_EXPORT_METHOD(openLeaderboardModal:(NSString *)leaderboardIdentifier
 RCT_EXPORT_METHOD(openLeaderboardModal:(NSDictionary *)options

@@ -36,11 +36,16 @@ const RNGameCenter = {
   // },
 
   // https://developer.apple.com/documentation/gamekit/gkscore
+  openLeaderboards:()=>{
+    return NativeModules.RNGameCenter.openLeaderboards()
+  },
+
   openLeaderboardModal:(options)=>{
     //props
     //leaderboardIdentifier or Defaults back to init leaderboardIdentifier
     return NativeModules.RNGameCenter.openLeaderboardModal(options)
   },
+
   submitLeaderboardScore:(options)=>{
     //optional: leaderboardIdentifier or Defaults back to init leaderboardIdentifier
     //required: score
